@@ -1,13 +1,15 @@
 import { useState } from 'react'
 import { Container, Links } from './styles';
 
-import { Header, Button, Section, Tag,  } from '../../components'
+import { Header, Button, ButtonText, Section, Tag } from '../../components'
 
 export function Details() {
 
   return (
     <Container>
       <Header />
+
+      <ButtonText title="Excluir Nota"/>
 
       <Section title="Links úteis">
         <Links>
