@@ -11,8 +11,9 @@ export const Container = styled.div`
   margin-top: 16px;
   border-radius: 10px;
   font-weight: 500;
+  text-align: center;
 
-  &:disabled {
+  &disabled {
     opacity: 0.5;
   }
 `;
