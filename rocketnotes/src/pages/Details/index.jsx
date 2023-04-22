@@ -10,7 +10,9 @@ export function Details() {
   return (
     <Container>
       <h1>Hello {name}, {saudation}</h1>
-      <Button />
+      <Button title="Clique aqui"/>
+      <Button title="Entrar"/>
+      <Button title="Cadastrar"/>
     </Container>
   )
 }
