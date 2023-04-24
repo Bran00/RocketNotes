@@ -1,5 +1,7 @@
 import styled from "styled-components";
 
+import backgroundImg from '../../assets/cafePapel.jpg'
+
 export const Container = styled.div`
   height: 100vh;
   display: flex;
@@ -38,4 +40,12 @@ export const Form = styled.form`
     color: ${({ theme }) => theme.COLORS.ORANGE};
   }
   
+`
+
+export const Background = styled.div`
+    flex: 1;
+    background: url(${backgroundImg}) no-repeat center center;
+    background-size: cover;
+    filter: brightness(50%);
+
 `
