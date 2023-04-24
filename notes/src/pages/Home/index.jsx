@@ -6,6 +6,7 @@ import { Header } from "../../components/Header"
 
 import { ButtonText } from "../../components/ButtonText"
 import { Section } from "../../components/Section"
+import { Input } from "../../components/Input"
 
 import { Note } from "../../components/Note"
 
@@ -29,6 +30,10 @@ export function Home() {
           <ButtonText title="NodeJS" />
         </li>
       </Menu>
+
+      <Search>
+        <Input placeholder="Pesquisar pelo título" icon={FiSearch} />
+      </Search>
 
       <Content>
         <Section title="Minhas notas">
