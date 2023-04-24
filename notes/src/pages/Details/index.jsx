@@ -1,7 +1,11 @@
-import { useState } from 'react'
+
 import { Container, Links, Content } from './styles';
 
-import { Header, Button, ButtonText, Section, Tag } from '../../components'
+import { Header } from "../../components/Header"
+import { Button } from "../../components/Button"
+import { ButtonText } from "../../components/ButtonText"
+import { Section } from "../../components/Section"
+import { Tag } from "../../components/Tag"
 
 export function Details() {
 

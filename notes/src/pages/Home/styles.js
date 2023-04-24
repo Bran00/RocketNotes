@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled from "styled-components"
 
 export const Container = styled.div`
   width: 100%;
@@ -7,14 +7,14 @@ export const Container = styled.div`
   display: grid;
   grid-template-columns: 250px auto;
   grid-template-rows: 105px 128px auto 64px;
-  grid-template-areas: 
-  "brand header"
-  "menu search"
-  "menu content"
-  "newnote content";
+  grid-template-areas:
+    "brand header"
+    "menu search"
+    "menu content"
+    "newnote content";
 
   background-color: ${({ theme }) => theme.COLORS.BACKGROUND_800};
-`;
+`
 
 export const Brand = styled.div`
   grid-area: brand;
@@ -46,21 +46,20 @@ export const Menu = styled.ul`
   > li {
     margin-bottom: 24px;
   }
-`;
+`
 
 export const Search = styled.div`
   grid-area: search;
 
   padding: 64px 64px 0;
-
-`;
+`
 
 export const Content = styled.div`
   grid-area: content;
 
   padding: 0 64px;
   overflow-y: auto;
-`;
+`
 
 export const NewNote = styled.button`
   grid-area: newnote;
@@ -75,4 +74,4 @@ export const NewNote = styled.button`
   svg {
     margin-right: 8px;
   }
-`;
+`
