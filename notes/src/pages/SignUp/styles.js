@@ -11,7 +11,6 @@ export const Container = styled.div`
 
 export const Form = styled.form`
   padding: 0 136px;
-
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -35,7 +34,7 @@ export const Form = styled.form`
   }
 
   > a {
-    margin-top: 124px;
+    margin-top: 54px;
     color: ${({ theme }) => theme.COLORS.ORANGE};
   }
   
