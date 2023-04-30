@@ -9,13 +9,42 @@ import { Button } from '../../components/Button';
 
 import { Container,  Form, Avatar } from "./styles";
 
+import { api } from '../../services/api';
+
+import avatarPlaceholder from '../../assets/user.png'
+
 export function Profile() {
-  const { user } = useAuth();
+  const { user, updateProfile } = useAuth();
 
   const [name, setName] = useState(user.name);
   const [email, setEmail] = useState(user.email);
   const [passwordOld, setPasswordOld] = useState('');
   const [passwordNew, setPasswordNew] = useState('');
+
+  const avatarUrl = user.avatar ? `${api.defaults.baseURL}/files/${user.avatar}` : avatarPlaceholder;
+
+  const [avatar, setAvatar] = useState(avatarUrl);
+  const [avatarFile, setAvatarFile] = useState(null);
+
+  async function handleUpdate() {
+    const user = {
+      name,
+      email,
+      password: passwordNew,
+      old_password: passwordOld
+    }
+
+    await updateProfile({ user, avatarFile });
+
+  }
+
+  function handleChangeAvatar(e) {
+    const file = e.target.files[0];
+    setAvatarFile(file);
+
+    const imagePreview = URL.createObjectURL(file);
+    setAvatar(imagePreview);
+  }
 
   return (
     <Container>
@@ -27,11 +56,16 @@ export function Profile() {
 
       <Form>
         <Avatar>
-          <img src="https://github.com/bran00.png" alt="Brando Rocha" />
+          <img src={avatar} alt='Foto de perfil' 
+          />
 
           <label htmlFor="avatar">
             <FiCamera />
-            <input id="avatar" type="file" />
+            <input 
+            id="avatar" 
+            type="file" 
+            onChange={handleChangeAvatar}
+            />
           </label>
         </Avatar>
 
@@ -40,7 +74,7 @@ export function Profile() {
           type="text"
           icon={FiUser}
           value={name}
-          onChage={(e) => setName(e.target.value)}
+          onChange={(e) => setName(e.target.value)}
         />
 
         <Input
@@ -48,7 +82,7 @@ export function Profile() {
           type="text"
           icon={FiMail}
           value={email}
-          onChage={(e) => setEmail(e.target.value)}
+          onChange={(e) => setEmail(e.target.value)}
         />
 
         <Input 
@@ -65,7 +99,9 @@ export function Profile() {
         onChange={(e) => setPasswordNew(e.target.value)}
         />
 
-        <Button title="Salvar" 
+        <Button 
+        title="Salvar" 
+        onClick={handleUpdate}
         />
       </Form>
     </Container>
