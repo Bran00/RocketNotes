@@ -21,13 +21,13 @@ export function Home() {
       <Header />
 
       <Menu>
-        <li>
+        <li key="all">
           <ButtonText title="Todos" isActive />
         </li>
-        <li>
+        <li key="react">
           <ButtonText title="React" />
         </li>
-        <li>
+        <li key="node" >
           <ButtonText title="NodeJS" />
         </li>
       </Menu>
@@ -41,7 +41,7 @@ export function Home() {
           <Note
             data={{
               title: "React",
-              tags: [{ name: "react" }, { name: "rocketseat" }],
+              tags: [{ name: "react" }, { name: "rocketseat" }, { name: "discover"}],
             }}
           />
         </Section>
