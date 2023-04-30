@@ -18,12 +18,11 @@ export function New() {
   
   function handleAddLink() {
     setLinks(prevState => [ ...prevState, newLink])
-    console.log(newLink)
     setNewLink('')
   }
 
-  function handleRemoveLink(id) {
-    
+  function handleRemoveLink(deleted) {
+    setLinks(prevState => prevState.filter(link => link !== deleted))
   }
 
   return (
@@ -43,7 +42,8 @@ export function New() {
             {links.map((link, index) => (
               <NoteItem 
               key={String(index)} 
-              value={link} 
+              value={link}
+              onClick={() => handleRemoveLink(link)}
               />
             ))}
             <NoteItem
