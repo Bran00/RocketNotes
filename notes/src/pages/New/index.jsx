@@ -47,6 +47,23 @@ export function New() {
   }
 
    async function handleNewNote() {
+    if(!title) {
+      return alert("Vocé deve adicionar um título!")
+    }
+
+    if(!description) {
+      return alert("Vocé deve adicionar uma descrição!")
+    }
+
+
+    if(tags.length < 1 ) {
+      return alert("Você deve adicionar uma tag!")
+    }
+
+    if(links.length < 1) {
+      return alert("Vocé deve adicionar um link!")
+    }
+
      await api.post("/notes", {
        title,
        description,
@@ -74,7 +91,7 @@ export function New() {
           />
 
           <Textarea 
-          placeholder="Observaçães"
+          placeholder="Observações"
           onChange={(e) => setDescription(e.target.value)}
           />
 
