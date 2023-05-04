@@ -1,5 +1,8 @@
-
+import { useState, useEffect } from 'react';
+import { useParams, useNavigate } from 'react-router-dom';
 import { Container, Links, Content } from './styles';
+
+import { api } from '../../services/api';
 
 import { Header } from "../../components/Header"
 import { Button } from "../../components/Button"
@@ -8,43 +11,83 @@ import { Section } from "../../components/Section"
 import { Tag } from "../../components/Tag"
 
 export function Details() {
+  const [data, setData] = useState(null);
+
+  const params = useParams();
+  const navigate = useNavigate();
+
+  function handleBack() {
+    navigate("/")
+  }
+
+  async function handleRemove() {
+    const confirm = window.confirm("Tem certeza que deseja excluir essa nota?")
+    
+    if (confirm) {
+      api.delete(`/notes/${params.id}`)
+      navigate("/")
+    }
+  }
+
+  useEffect(() => {
+    async function fetchNote() {
+      const response = await api.get(`/notes/${params.id}`);
+      setData(response.data);
+    
+    }
+    fetchNote();
+  }, [])
 
   return (
     <Container>
       <Header />
-
+    { data &&
       <main>
         <Content>
 
-          <ButtonText title="Excluir Nota" />
-          <h1>Introdução ao React</h1>
+          <ButtonText title="Excluir Nota" onClick={handleRemove}  />
+          <h1>{data.title}</h1>
 
           <p>
-            Lorem ipsum dolor sit, amet consectetur adipisicing elit. Reprehenderit, omnis, nam corrupti nulla obcaecati mollitia unde iusto, praesentium natus possimus iste deleniti? Possimus, error! Dolorum quia commodi consequuntur magnam ex?
-            Lorem ipsum dolor sit amet consectetur, adipisicing elit. Vitae explicabo quo rerum, quidem molestiae sint perspiciatis maiores doloribus illum laborum autem quisquam voluptatibus repellat beatae accusamus esse hic sapiente adipisci.
+            {data.description}
           </p>
-          <Section title="Links úteis">
+         { 
+          data.links &&
+         <Section title="Links úteis">
             <Links>
-              <li>
-                <a href="#">Item 1</a>
-              </li>
-              <li>
-                <a href="#">Item 2</a>
-              </li>
-              <li>
-                <a href="#">Item 3</a>
-              </li>
+            {
+              data.links.map(link => (
+                <li key={String(link.id)}>
+                 <a href={link.url} target="_blank">
+                  {link.url}
+                  </a>
+                </li>
+              ))
+            }
             </Links>
           </Section>
+          }
+          
+          { 
+          data.tags &&
+            <Section title="Marcadores">
 
-          <Section title="Marcadores">
-            <Tag title="express" />
-            <Tag title="node" />
+            {
+              data.tags.map(tag => (
+              <Tag
+               key={String(tag.id)}
+               title={tag.name}
+              />
+              ))
+            }
+
           </Section>
+          }
 
-          <Button title="Voltar" />
+          <Button title="Voltar" onClick={handleBack} />
         </Content>
       </main>
+    }
     </Container>
   )
 }
