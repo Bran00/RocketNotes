@@ -17,15 +17,15 @@ export function Details() {
   const navigate = useNavigate();
 
   function handleBack() {
-    navigate("/")
+    navigate(-1)
   }
 
   async function handleRemove() {
     const confirm = window.confirm("Tem certeza que deseja excluir essa nota?")
-    
+
     if (confirm) {
       api.delete(`/notes/${params.id}`)
-      navigate("/")
+      navigate(-1)
     }
   }
 
